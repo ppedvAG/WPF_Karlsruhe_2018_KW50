@@ -1,0 +1,106 @@
+﻿<Window x:Class="HalloStyles.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HalloStyles"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="486.8" Width="536">
+    <Window.Resources>
+        <Style x:Key="myStyle" TargetType="Control">
+            <Setter Property="Background" Value="Violet"/>
+            <Setter Property="FontFamily" Value="Jokerman,Times New Roman"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="Padding" Value="8"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="FontSize" Value="16"/>
+                </Trigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard AutoReverse="True">
+                            <ColorAnimation Duration="0:0:1" To="Red"
+                                            Storyboard.TargetProperty="Background.Color"/>
+
+                            <DoubleAnimation Duration="0:0:1" To="36" Storyboard.TargetProperty="FontSize">
+                                <DoubleAnimation.EasingFunction>
+                                    <ElasticEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="bessererStyle" TargetType="Button" BasedOn="{StaticResource myStyle}">
+            <Setter Property="Background" Value="Aquamarine"/>
+
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource bessererStyle}">
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style TargetType="Label" BasedOn="{StaticResource myStyle}"/>
+        <Style TargetType="TextBox" BasedOn="{StaticResource myStyle}"/>
+        <Storyboard AutoReverse="True" x:Key="OnMouseEnter1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="path">
+                <EasingDoubleKeyFrame KeyTime="0" Value="7.013">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="99.813"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="path">
+                <EasingDoubleKeyFrame KeyTime="0" Value="2.731">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="7.531"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="path">
+            <BeginStoryboard Storyboard="{StaticResource OnMouseEnter1}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <StackPanel>
+        <Path x:Name="path" Data="M76.166329,437.66 C93.766329,463.79334 109.23311,469.12553 188.69959,464.85892 268.16607,460.59232 316.69928,442.99249 327.89925,430.19271 339.09922,417.39293 373.76582,428.05942 300.16599,412.59301 226.56617,397.12661 209.49974,396.59329 184.4331,398.72659 159.36645,400.85988 58.566329,411.52667 76.166329,437.66 z" Height="49.15" Margin="177.416,0,0,0" Stretch="Fill" Stroke="Black" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="68.903">
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1.001"/>
+                    <SkewTransform AngleY="2.136" AngleX="2.143"/>
+                    <RotateTransform Angle="-81.702"/>
+                    <TranslateTransform X="1.131" Y="1.146"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+            <Path.Effect>
+                <DropShadowEffect/>
+            </Path.Effect>
+            <Path.Fill>
+                <LinearGradientBrush EndPoint="1.004,0.327" StartPoint="0.188,0.579">
+                    <GradientStop Color="#FFFF1A1A" Offset="0"/>
+                    <GradientStop Color="#FFEACECE" Offset="1"/>
+                </LinearGradientBrush>
+            </Path.Fill>
+        </Path>
+        <Button Style="{StaticResource myStyle}">Button</Button>
+        <Button Style="{StaticResource bessererStyle}">Button</Button>
+        <Button Style="{StaticResource bessererStyle}" Background="Orange">Button</Button>
+        <Button>
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect> Button
+        </Button>
+        <Label>Label</Label>
+        <TextBox>lala</TextBox>
+        <Button Content="Button" Margin="0"/>
+        <Button Content="Button" Margin="0"/>
+       
+    </StackPanel>
+</Window>
