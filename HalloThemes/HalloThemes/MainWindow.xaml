@@ -5,7 +5,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HalloThemes"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Icon="Assets/yellow_submarine.png"
         Title="MainWindow" Height="450" Width="600">
     <UniformGrid Columns="2">
         <StackPanel>
@@ -47,8 +47,15 @@
         </StackPanel>
         <StackPanel>
             <WrapPanel>
-                <Button Content="Button 1"/>
-                <Button Content="Button 2"/>
+                <Button >
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Assets/travel.png"/>
+                            <TextBlock>Reisen</TextBlock>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Click="Button_Click" Content="Button 2"/>
                 <Button Content="Button 3"/>
             </WrapPanel>
             <DatePicker />
