@@ -18,7 +18,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Margin="4" Grid.Row="0">Home</TextBlock>
@@ -42,13 +41,19 @@
                     </LinearGradientBrush>
                 </Button.Background> OK
             </Button>
-            <Button Margin="4" Padding="8,4">
+            <Button Margin="4"  Padding="8,4">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#F1BA08" Offset="0"/>
                         <GradientStop Color="#EDF121" Offset="1"/>
                     </LinearGradientBrush>
-                </Button.Background> Abbrechen
+                </Button.Background>
+                <StackPanel>
+                    <Ellipse Width="20" Height="20" Fill="RoyalBlue"/>
+                    <TextBlock>Klick mich!</TextBlock>
+                    <Ellipse Width="20" Height="20" Fill="RoyalBlue"/>
+
+                </StackPanel>
             </Button>
         </StackPanel>
     </Grid>

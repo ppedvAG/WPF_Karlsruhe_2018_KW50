@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="GlobaleDesigns.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GlobaleDesigns"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="300">
+    <StackPanel>
+        <CheckBox>CheckMe</CheckBox>
+        <Button>
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FFDFFF2C" Offset="0"/>
+                    <GradientStop Color="#FF3A85B4" Offset="1"/>
+                    <GradientStop Color="#FFFDFF00" Offset="0.788"/>
+                    <GradientStop Color="#FFFD10CC" Offset="0.323"/>
+                </RadialGradientBrush>
+            </Button.Background> Klick Me</Button>
+        <TextBox>lalal</TextBox>
+    </StackPanel>
+</UserControl>
