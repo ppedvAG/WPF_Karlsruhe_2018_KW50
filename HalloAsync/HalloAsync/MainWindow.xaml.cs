@@ -115,22 +115,28 @@ namespace HalloAsync
 
         private async void StartAlt(object sender, RoutedEventArgs e)
         {
+            pb1.IsIndeterminate = true;
             //MessageBox.Show(GetValueByAlteUndLangsameFunktion().ToString());
             //MessageBox.Show((await GetValueByAlteUndLangsameFunktionAsync()).ToString());
+
             long result = await GetValueByAlteUndLangsameFunktionAsync();
             MessageBox.Show($"Result: {result}");
+            pb1.IsIndeterminate = !true;
+
         }
 
         private async void DbGetNames(object sender, RoutedEventArgs e)
         {
-            string conString = "Server=.;Database=Northwind;Trusted_Connection=true";
+            cts = new CancellationTokenSource();
+            pb1.IsIndeterminate = true;
+            string conString = "Server=.\\SQLEXPRESS;Database=Northwind;Trusted_Connection=true;Asynchronous Processing=True;";
             using (var con = new SqlConnection(conString))
             {
-                await con.OpenAsync();
+                await con.OpenAsync(cts.Token);
                 using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = "SELECT * FROM Employees;WAITFOR DELAY '00:00:02';";
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    using (var reader = await cmd.ExecuteReaderAsync(cts.Token))
                     {
                         List<string> names = new List<string>();
                         while (reader.Read())
@@ -139,6 +145,8 @@ namespace HalloAsync
                     }
                 }
             }
+            pb1.IsIndeterminate = !true;
+
         }
     }
 }
