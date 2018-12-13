@@ -4,6 +4,40 @@
              xmlns:local="clr-namespace:HalloDaten"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        
+        <DataTemplate x:Key="autoTemplate">
+            <Border BorderThickness="4" BorderBrush="Green" CornerRadius="4">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="{Binding Hersteller.Name}"/>
+                    <TextBlock Grid.Row="1" FontWeight="Bold" FontSize="16" Text="{Binding Modell}"/>
+
+                    <!--<Ellipse Width="32" Height="32" Fill="Magenta" Grid.Column="1"/>-->
+                    <Image  Grid.Column="1" Stretch="None">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source" Value="small_car.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Hersteller.Name}" Value="Baudi">
+                                        <Setter Property="Source" Value="car_taxi.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <TextBlock Text="{Binding Baujahr,StringFormat=yyyy}" Grid.Column="1" Grid.Row="1"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

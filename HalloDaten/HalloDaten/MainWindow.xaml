@@ -6,31 +6,53 @@
         xmlns:local="clr-namespace:HalloDaten"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top">
             <WrapPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="4"/>
                     <Setter Property="Padding" Value="8,2"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Grid >
+                                    <Ellipse Fill="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                    <ContentPresenter Margin="8"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="Aqua"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </WrapPanel.Resources>
-            <Button Click="DemoDatenLaden">Laden</Button>
+            <Button Click="DemoDatenLaden">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Width="10" Height="10" Fill="Red"/>
+                    <TextBlock>Demo</TextBlock>
+                </StackPanel></Button>
             <Button Click="Speichern">Speichern...</Button>
             <Button>Neu</Button>
             <Button>Löschen</Button>
             <Button>Orbital Laser abfeuern</Button>
         </WrapPanel>
-        
+
         <StatusBar DockPanel.Dock="Bottom" Background="ForestGreen" Height="23"/>
-        
+
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition MinWidth="200" Width="Auto"/>
+                <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <ListBox Name="lb1" DisplayMemberPath="Modell"/>
+            <ListBox ItemTemplate="{StaticResource autoTemplate}" 
+                     HorizontalContentAlignment="Stretch" 
+                     Name="lb1" />
 
             <GridSplitter Grid.Column="1" Width="4" Background="Transparent" HorizontalAlignment="Stretch"/>
 
@@ -42,9 +64,12 @@
                 <Label>Hersteller</Label>
                 <ComboBox Name="cb1" DisplayMemberPath="Name" 
                           SelectedItem="{Binding ElementName=lb1,Path=SelectedItem.Hersteller}" />
+                <ContentPresenter ContentTemplate="{StaticResource autoTemplate}" 
+                                  Content="{Binding ElementName=lb1,Path=SelectedItem}"/>
+
             </StackPanel>
 
         </Grid>
-        
+
     </DockPanel>
 </Window>
