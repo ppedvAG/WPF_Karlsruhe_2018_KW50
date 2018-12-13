@@ -1,0 +1,50 @@
+﻿<Window x:Class="HalloDaten.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HalloDaten"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <WrapPanel DockPanel.Dock="Top">
+            <WrapPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="4"/>
+                    <Setter Property="Padding" Value="8,2"/>
+                </Style>
+            </WrapPanel.Resources>
+            <Button Click="DemoDatenLaden">Laden</Button>
+            <Button Click="Speichern">Speichern...</Button>
+            <Button>Neu</Button>
+            <Button>Löschen</Button>
+            <Button>Orbital Laser abfeuern</Button>
+        </WrapPanel>
+        
+        <StatusBar DockPanel.Dock="Bottom" Background="ForestGreen" Height="23"/>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="200" Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <ListBox Name="lb1" DisplayMemberPath="Modell"/>
+
+            <GridSplitter Grid.Column="1" Width="4" Background="Transparent" HorizontalAlignment="Stretch"/>
+
+            <StackPanel Grid.Column="2"  Margin="12,0">
+                <Label>Model</Label>
+                <TextBox Text="{Binding ElementName=lb1,Path=SelectedItem.Modell,UpdateSourceTrigger=PropertyChanged}"/>
+                <Label>Baujahr</Label>
+                <DatePicker SelectedDate="{Binding ElementName=lb1,Path=SelectedItem.Baujahr}"/>
+                <Label>Hersteller</Label>
+                <ComboBox Name="cb1" DisplayMemberPath="Name" 
+                          SelectedItem="{Binding ElementName=lb1,Path=SelectedItem.Hersteller}" />
+            </StackPanel>
+
+        </Grid>
+        
+    </DockPanel>
+</Window>
