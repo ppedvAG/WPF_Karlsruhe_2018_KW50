@@ -3,7 +3,6 @@ using ppedv.Weihnachtsbaeckerei.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +11,7 @@ using System.Windows.Input;
 namespace ppedv.Weihnachtsbaeckerei.UI.WPF.ViewModels
 {
 
-
-    public class CookieViewModel : INotifyPropertyChanged
+    public class CookieViewModel : ViewModelBase
     {
         public ObservableCollection<Cookie> CookieList { get; set; }
 
@@ -41,14 +39,10 @@ namespace ppedv.Weihnachtsbaeckerei.UI.WPF.ViewModels
             set
             {
                 selectedCookie = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("SelectedCookie"));
-                    PropertyChanged(this, new PropertyChangedEventArgs("KJ"));
-                    PropertyChanged(this, new PropertyChangedEventArgs("KCal"));
-
-
-                }
+                OnPropertyChanged("");//alle 
+                //OnPropertyChanged("SelectedCookie");
+                //OnPropertyChanged("KJ");
+                //OnPropertyChanged("KCal");
             }
         }
 
@@ -65,14 +59,13 @@ namespace ppedv.Weihnachtsbaeckerei.UI.WPF.ViewModels
                 if (selectedCookie != null)
                     selectedCookie.KCal = value;
 
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("KJ"));
-                }
+
+                OnPropertyChanged(nameof(Kilojoule));
+
             }
         }
 
-        public int KJ
+        public int Kilojoule
         {
             get
             {
@@ -84,7 +77,6 @@ namespace ppedv.Weihnachtsbaeckerei.UI.WPF.ViewModels
 
         EfContext context = new EfContext();
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public CookieViewModel()
         {
@@ -93,9 +85,9 @@ namespace ppedv.Weihnachtsbaeckerei.UI.WPF.ViewModels
             Zutaten = new List<Zutat>(context.Zutaten.OrderBy(x => x.Name).ToList());
 
             SaveCommand = new SaveCommand(context);
-
+        
             SaveCommand2 = new RelayCommand(UserWantsToSave);
-            SaveCommand2 = new RelayCommand(obj => context.SaveChanges());
+            SaveCommand2 = new RelayCommand(obj => context.SaveChanges(), o => context.ChangeTracker.HasChanges());
             NewCommand = new RelayCommand(UserWantsToCreateCookie);
         }
 

@@ -19,7 +19,7 @@
                 </Style>
             </WrapPanel.Resources>
             <Button>Laden</Button>
-            <Button Command="{Binding SaveCommand}">Speichern</Button>
+            <Button Command="{Binding SaveCommand2}">Speichern</Button>
             <Button Command="{Binding NewCommand}">Neu</Button>
             <Button>Löschen</Button>
         </WrapPanel>
@@ -39,7 +39,7 @@
                 <DatePicker SelectedDate="{Binding SelectedCookie.Herstellung}"/>
                 <StackPanel Orientation="Horizontal">
                     <Label>KCal</Label>
-                    <TextBlock Text="{Binding KJ}"/>
+                    <TextBlock Text="{Binding Kilojoule}"/>
                 </StackPanel>
                 <TextBox Text="{Binding KCal,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label>Glasur</Label>
