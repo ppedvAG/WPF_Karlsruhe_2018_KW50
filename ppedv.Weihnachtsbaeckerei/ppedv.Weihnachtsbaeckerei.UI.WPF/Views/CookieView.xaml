@@ -3,9 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:ppedv.Weihnachtsbaeckerei.UI.WPF.ViewModels"
              xmlns:local="clr-namespace:ppedv.Weihnachtsbaeckerei.UI.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="600">
+    <UserControl.DataContext>
+        <vm:CookieViewModel/>
+    </UserControl.DataContext>
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top">
             <WrapPanel.Resources>
@@ -15,8 +19,8 @@
                 </Style>
             </WrapPanel.Resources>
             <Button>Laden</Button>
-            <Button>Speichern</Button>
-            <Button>Neu</Button>
+            <Button Command="{Binding SaveCommand}">Speichern</Button>
+            <Button Command="{Binding NewCommand}">Neu</Button>
             <Button>Löschen</Button>
         </WrapPanel>
         <Grid >
@@ -24,20 +28,24 @@
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid/>
+            <DataGrid ItemsSource="{Binding CookieList}"
+                      SelectedItem="{Binding SelectedCookie}"/>
             <StackPanel Grid.Column="1" Margin="8">
                 <Label>Name</Label>
-                <TextBox/>
+                <TextBox Text="{Binding SelectedCookie.Name}"/>
                 <Label>Form</Label>
-                <ComboBox/>
+                <ComboBox ItemsSource="{Binding Formen}" SelectedItem="{Binding SelectedCookie.Form}"/>
                 <Label>Herstellung</Label>
-                <DatePicker/>
-                <Label>KCal</Label>
-                <TextBox/>
+                <DatePicker SelectedDate="{Binding SelectedCookie.Herstellung}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label>KCal</Label>
+                    <TextBlock Text="{Binding KJ}"/>
+                </StackPanel>
+                <TextBox Text="{Binding KCal,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label>Glasur</Label>
-                <ComboBox/>
+                <ComboBox ItemsSource="{Binding Glasuren}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCookie.Glasur}"/>
                 <GroupBox Header="Zutaten">
-                    <ListBox MinHeight="80"/>
+                    <ListBox MinHeight="80" ItemsSource="{Binding Zutaten}"/>
                 </GroupBox>
             </StackPanel>
         </Grid>

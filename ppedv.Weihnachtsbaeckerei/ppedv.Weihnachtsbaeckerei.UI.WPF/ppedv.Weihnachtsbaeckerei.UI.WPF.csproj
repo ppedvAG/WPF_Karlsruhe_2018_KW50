@@ -35,7 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,6 +62,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\CookieViewModel.cs" />
+    <Compile Include="ViewModels\SaveCommand.cs" />
     <Compile Include="Views\CookieView.xaml.cs">
       <DependentUpon>CookieView.xaml</DependentUpon>
     </Compile>
@@ -107,6 +117,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,6 +125,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ppedv.Weihnachtsbaeckerei.Data.EF\ppedv.Weihnachtsbaeckerei.Data.EF.csproj">
+      <Project>{60a16b9b-0d13-45ec-82c9-64f522198278}</Project>
+      <Name>ppedv.Weihnachtsbaeckerei.Data.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ppedv.Weihnachtsbaeckerei.Model\ppedv.Weihnachtsbaeckerei.Model.csproj">
+      <Project>{96d46f9a-5e91-4ef0-ab56-7fb9eb5a113c}</Project>
+      <Name>ppedv.Weihnachtsbaeckerei.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

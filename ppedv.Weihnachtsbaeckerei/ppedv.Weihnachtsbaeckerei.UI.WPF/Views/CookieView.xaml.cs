@@ -23,6 +23,7 @@ namespace ppedv.Weihnachtsbaeckerei.UI.WPF.Views
         public CookieView()
         {
             InitializeComponent();
+            //this.DataContext = new ViewModels.CookieViewModel(); bä!!!
         }
     }
 }

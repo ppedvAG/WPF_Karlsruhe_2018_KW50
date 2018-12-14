@@ -9,5 +9,14 @@ namespace ppedv.Weihnachtsbaeckerei.Data.EF
         public DbSet<Glasur> Glasuren { get; set; }
         public DbSet<Zutat> Zutaten { get; set; }
 
+        public EfContext() : base("Server=.;Database=Cookies;Trusted_Connection=true;")
+        { }
+
+
+        public override int SaveChanges()
+        {
+            //todo Audit here
+            return base.SaveChanges();
+        }
     }
 }
